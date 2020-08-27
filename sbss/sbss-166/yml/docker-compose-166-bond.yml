@@ -1,0 +1,101 @@
+version: '3.8'
+
+networks:
+    0_sbss_network:
+        name: 0_sbss_network
+        driver: macvlan
+        driver_opts:
+            parent: eth0
+        ipam:
+            config:
+                - subnet: 10.229.244.0/24
+    1_sbss_network:
+        name: 1_sbss_network
+        driver: macvlan
+        driver_opts:
+            parent: eth1
+        ipam:
+            config:
+                - subnet: 192.168.1.0/24
+    2_sbss_network:
+        name: 2_sbss_network
+        driver: macvlan
+        driver_opts:
+            parent: bond0
+        ipam:
+            config:
+                - subnet: 192.168.10.0/24
+
+services:
+    sbss1:
+        image: cvex/sdvsm:v1
+        container_name: sbss1
+        privileged: true
+        restart: always
+        volumes:
+            - "/home/sbss/volume/sbss1/keepalived:/etc/keepalived"
+        networks:
+            0_sbss_network:
+                ipv4_address: 10.229.244.181
+            1_sbss_network:
+                ipv4_address: 192.168.1.181
+            2_sbss_network:
+                ipv4_address: 192.168.10.181
+    sbss2:
+        image: cvex/sdvsm:v1
+        container_name: sbss2
+        privileged: true
+        restart: always
+        volumes:
+            - "/home/sbss/volume/sbss2/keepalived:/etc/keepalived"
+        networks:
+            0_sbss_network:
+                ipv4_address: 10.229.244.182
+            1_sbss_network:
+                ipv4_address: 192.168.1.182
+            2_sbss_network:
+                ipv4_address: 192.168.10.182
+    sbss3:
+        image: cvex/sdvsm:v1
+        container_name: sbss3
+        privileged: true
+        restart: always
+        volumes:
+            - "/home/sbss/volume/sbss3/keepalived:/etc/keepalived"
+        networks:
+            0_sbss_network:
+                ipv4_address: 10.229.244.183
+            1_sbss_network:
+                ipv4_address: 192.168.1.183
+            2_sbss_network:
+                ipv4_address: 192.168.10.183
+    sbss4:
+        image: cvex/sdvsm:v1
+        container_name: sbss4
+        privileged: true
+        restart: always
+        volumes:
+            - "/home/sbss/volume/sbss4/keepalived:/etc/keepalived"
+        networks:
+            0_sbss_network:
+                ipv4_address: 10.229.244.184
+            1_sbss_network:
+                ipv4_address: 192.168.1.184
+            2_sbss_network:
+                ipv4_address: 192.168.10.184
+    sbss5:
+        image: cvex/sdvsm:v1
+        container_name: sbss5
+        privileged: true
+        restart: always
+        volumes:
+            - "/home/sbss/volume/sbss5/keepalived:/etc/keepalived"
+        networks:
+            0_sbss_network:
+                ipv4_address: 10.229.244.185
+            1_sbss_network:
+                ipv4_address: 192.168.1.185
+            2_sbss_network:
+                ipv4_address: 192.168.10.185
+
+
